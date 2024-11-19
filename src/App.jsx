@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { TodoProvider } from "./contexts/TodoContext";
+import { TodoProvider } from "./contexts";
 import TodoForm from "./components/TodoForm";
 import TodoItem from "./components/TodoItem";
 
 function App() {
   const [todos, setTodos] = useState([]);
 
-  const addTodo = (todoMessage) => {
-    setTodos((prev) => [
-      { id: Date.now(), todo: todoMessage, isCompleted: false },
-      ...prev,
-    ]);
+  const addTodo = (todo) => {
+    setTodos((prev) => [{ id: Date.now(), todo, isCompleted: false }, ...prev]);
   };
 
   const updateTodo = (id, updatedTodo) => {
     setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, ...updatedTodo } : todo
-      )
+      prev.map((todo) => (todo.id === id ? { ...todo, ...updatedTodo } : todo))
     );
   };
 
@@ -47,17 +42,13 @@ function App() {
 
   return (
     <TodoProvider value={{ todos, addTodo, updateTodo, deleteTodo, toggleTodo }}>
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-5">
-        <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
-          <h1 className="text-2xl font-bold text-center mb-5 text-blue-600">
-            Todo List
-          </h1>
-          <TodoForm />
-          <div className="mt-4 space-y-2">
-            {todos.map((todo) => (
-              <TodoItem key={todo.id} todo={todo} />
-            ))}
-          </div>
+      <div className="min-h-screen bg-gradient-to-r from-gray-800 to-gray-900 p-6">
+        <h1 className="text-4xl font-bold text-center text-white">Eyobs Todo App</h1>
+        <TodoForm />
+        <div className="mt-6">
+          {todos.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} />
+          ))}
         </div>
       </div>
     </TodoProvider>

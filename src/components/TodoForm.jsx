@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTodo } from "../contexts/TodoContext";
-import { FiPlus } from "react-icons/fi";
+import { PlusCircleIcon } from "@heroicons/react/outline"
 
 function TodoForm() {
   const [writing, setWriting] = useState("");
@@ -16,21 +16,27 @@ function TodoForm() {
   };
 
   return (
-    <form onSubmit={add} className="flex">
-      <input
-        type="text"
-        placeholder="Write a todo..."
-        value={writing}
-        onChange={(e) => setWriting(e.target.value)}
-        className="w-full p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring focus:ring-blue-500"
-      />
-      <button
-        type="submit"
-        className="rounded-r-lg px-4 py-2 bg-green-600 text-white flex items-center justify-center hover:bg-green-700"
+    <div className="p-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
+      <form
+        onSubmit={add}
+        className="flex items-center justify-between space-x-2"
       >
-        <FiPlus className="text-lg" />
-      </button>
-    </form>
+        <input
+          type="text"
+          placeholder="Write a todo..."
+          value={writing}
+          onChange={(e) => setWriting(e.target.value)}
+          className="flex-grow p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300"
+        />
+        <button
+          type="submit"
+          className="flex items-center px-4 py-2 space-x-1 text-white bg-green-600 rounded-lg hover:bg-green-700"
+        >
+          <PlusCircleIcon className="w-5 h-5" />
+          <span>Add</span>
+        </button>
+      </form>
+    </div>
   );
 }
 
